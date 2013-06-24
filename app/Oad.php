@@ -1,8 +1,8 @@
 <?php
 /**
- * Descrição: Classe de conexão ao banco de dados e execução de consultas SQL
+ * Descriï¿½ï¿½o: Classe de conexï¿½o ao banco de dados e execuï¿½ï¿½o de consultas SQL
  * @author Fabricio Nogueira.
- * @release Criação do arquivo.
+ * @release Criaï¿½ï¿½o do arquivo.
  * Data 01/08/2010
  */
 require_once('Resultset.php');
@@ -10,47 +10,31 @@ class Oad {
     private static $oConexao;
     private static $vResult = array();
     /**
-     * Descrição: abre uma conexão com o banco de dados.
+     * Descriï¿½ï¿½o: abre uma conexï¿½o com o banco de dados.
      */
     static function conectar() {
-    /**
-     * Banco desenvolvimento
-     */
-//    $sHost = "postgresql03.tocandoasnacoes.com.br";
-//    $sUser = "tocandoasnacoes7";
-//    $sSenha = "net2161";
-//    $sBd = "tocandoasnacoes7";
-//    $sPorta = 5432;
-    /**
-     * Banco testes
-     */
-     /*$sHost = "postgresql05.tocandoasnacoes.com.br";
-    $sUser = "tocandoasnacoes9";
-    $sSenha = "Net2161";
-    $sBd = "tocandoasnacoes9";
-    $sPorta = 5432;*/
     /**
      * Banco Local
      */
     $sHost = "127.0.0.1";
-    $sUser = "tocandoasnacoes7";
-    $sSenha = "net2161";
-    $sBd = "tocandoasnacoes7";
+    $sUser = "tocandoasnacoes";
+    $sSenha = "123456";
+    $sBd = "tocandoasnacoes";
     $sPorta = 5432;
         if (!(self::$oConexao = @pg_connect("host=$sHost port=$sPorta dbname=$sBd user=$sUser password=$sSenha"))) {
-            throw new Exception("Erro ao conectar no banco de dados do sistema.ß");
+            throw new Exception("Erro ao conectar no banco de dados do sistema.ï¿½");
         }
     }
     /**
-     * Descrição: Fecha a conexão com o banco de dados.
+     * Descriï¿½ï¿½o: Fecha a conexï¿½o com o banco de dados.
      */
     static function desconectar() {
         if (!(@pg_close())) {
-            throw new Exception("Erro ao fechar o banco de dados do sistema.ß");
+            throw new Exception("Erro ao fechar o banco de dados do sistema.ï¿½");
         }
     }
     /**
-     * Descrição: executa uma query SQL no banco de dados.
+     * Descriï¿½ï¿½o: executa uma query SQL no banco de dados.
      */
     static function executar($sQuery) {
         if (!@pg_query(self::$oConexao, $sQuery)) {
@@ -58,7 +42,7 @@ class Oad {
         }
     }
     /**
-     * Descrição: busca os dados no banco e armazena em um vetor.
+     * Descriï¿½ï¿½o: busca os dados no banco e armazena em um vetor.
      */
     static function consultar($sQuery) {
         $result = new Resultset();
@@ -76,19 +60,19 @@ class Oad {
         return $result;
     }
     /**
-     * Descrição: inicia uma transação com o banco de dados.
+     * Descriï¿½ï¿½o: inicia uma transaï¿½ï¿½o com o banco de dados.
      */
     static function begin() {
         self::executar("BEGIN");
     }
     /**
-     * Descrição: confirma uma transação com o banco de dados.
+     * Descriï¿½ï¿½o: confirma uma transaï¿½ï¿½o com o banco de dados.
      */
     static function commit() {
         self::executar("COMMIT");
     }
     /**
-     * Descrição: desfaz uma transação com o banco de dados.
+     * Descriï¿½ï¿½o: desfaz uma transaï¿½ï¿½o com o banco de dados.
      */
     static function rollback() {
         self::executar("ROLLBACK");
